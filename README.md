@@ -1,4 +1,4 @@
-# Intern-Bookmark-scala
+# Intern-Bookmark
 
 ## 準備
 
