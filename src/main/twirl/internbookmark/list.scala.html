@@ -1,0 +1,9 @@
+@(bookmarks: List[internbookmark.model.Bookmark])
+@wrapper("Bookmarks"){
+  <a href="/bookmarks/add">Add</a>
+  <ul>
+  @for(bookmark <- bookmarks){
+    <li><a href="@bookmark.entry.url">@bookmark.entry.title</a> - @bookmark.comment - @bookmark.createdAt.toString <a href="/bookmarks/@bookmark.id/edit">edit</a> <a href="/bookmarks/@bookmark.id/delete">delete</a></li>
+  }
+  </ul>
+}

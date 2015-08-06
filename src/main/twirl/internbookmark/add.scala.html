@@ -1,0 +1,10 @@
+@()
+@wrapper("Add Bookmark"){
+  <form action="/bookmarks/add" method="POST">
+    <dl>
+      <dt><label for="url">URL:</label></dt><dd><input type="text" name="url" size="80" value=""/></dd>
+      <dt><label for="comment">Comment:</label></dt><dd><input type="text" name="comment" size="80"  value=""/></dd>
+    </dl>
+    <input type="submit" value="Add"/> <a href="/bookmarks">List</a>
+  </form>
+}
