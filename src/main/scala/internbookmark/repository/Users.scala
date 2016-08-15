@@ -1,6 +1,5 @@
 package internbookmark.repository
 
-import internbookmark.service
 import internbookmark.model.User
 import scala.concurrent.ExecutionContext.Implicits.global
 import org.joda.time.LocalDateTime
@@ -14,11 +13,11 @@ object Users {
   private implicit val getUserRowResult = GetResult(r => UserRow(r.<<, r.<<, r.<<, r.<<))
 
   def find(userId: Long)(implicit ctx: Context): Option[User] = run(
-    sql"""SELECT * FROM user WHERE id = $userId LIMIT 1""".as[User].map(_.headOption)
+    sql"""SELECT * FROM user WHERE id = $userId LIMIT 1""".as[UserRow].map(_.headOption)
   )
 
   private def findByName(name: String)(implicit ctx: Context): Option[User] = run(
-    sql"""SELECT * FROM user WHERE name = $name LIMIT 1""".as[User].map(_.headOption)
+    sql"""SELECT * FROM user WHERE name = $name LIMIT 1""".as[UserRow].map(_.headOption)
   )
 
   def findOrCreateByName(name: String)(implicit ctx: Context): User =

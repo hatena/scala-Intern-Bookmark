@@ -3,7 +3,6 @@ package internbookmark.repository
 import internbookmark.model.Entry
 import scala.concurrent.ExecutionContext.Implicits.global
 import org.joda.time.LocalDateTime
-import slick.driver.MySQLDriver.api.{actionBasedSQLInterpolation => _, _}
 import com.github.tarao.slickjdbc.interpolation.SQLInterpolation._
 import com.github.tarao.slickjdbc.interpolation.CompoundParameter._
 import slick.jdbc.GetResult
@@ -18,11 +17,11 @@ trait Entries {
   private implicit val getUserRowResult = GetResult(r => EntryRow(r.<<, r.<<, r.<<, r.<<, r.<<))
 
   def find(entryId: Long)(implicit ctx: Context): Option[Entry] = run(
-    sql"SELECT * FROM entry WHERE id = ${entryId} LIMIT 1".as[Entry].map(_.headOption)
+    sql"SELECT * FROM entry WHERE id = ${entryId} LIMIT 1".as[EntryRow].map(_.headOption)
   )
 
   def findByUrl(url: String)(implicit ctx: Context): Option[Entry] = run(
-    sql"SELECT * FROM entry WHERE url = ${url} LIMIT 1".as[Entry].map(_.headOption)
+    sql"SELECT * FROM entry WHERE url = ${url} LIMIT 1".as[EntryRow].map(_.headOption)
   )
 
   def findOrCreateByUrl(url: String)(implicit ctx: Context): Entry =
@@ -47,8 +46,8 @@ trait Entries {
   }
 
   def searchByIds(ids: Seq[Long])(implicit ctx: Context): Seq[Entry] =
-    NonEmpty.fromTraversable(ids).fold(Seq(): Seq[Entry]){ nel =>
-      run(sql"SELECT * FROM entry WHERE id IN $nel".as[Entry])
+    NonEmpty.fromTraversable(ids).fold(Seq(): Seq[EntryRow]){ nel =>
+      run(sql"SELECT * FROM entry WHERE id IN $nel".as[EntryRow])
     }
 }
 

@@ -1,4 +1,3 @@
-import internbookmark._
 import jp.ne.hatena.intern.scalatra.HatenaOAuth
 import org.scalatra._
 import javax.servlet.ServletContext

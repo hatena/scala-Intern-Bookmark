@@ -1,6 +1,6 @@
 package internbookmark.helper
 
-import org.scalatest.{FunSpec, BeforeAndAfterAll, BeforeAndAfter}
+import org.scalatest.{FunSpec, BeforeAndAfterAll}
 import internbookmark.repository.Context
 
 trait SetupDB extends BeforeAndAfterAll { self: FunSpec =>

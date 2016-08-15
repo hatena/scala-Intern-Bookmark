@@ -3,8 +3,8 @@ CREATE TABLE user (
 
     `name` VARBINARY(32) NOT NULL,
 
-    `created_at` TIMESTAMP NOT NULL,
-    `updated_at` TIMESTAMP NOT NULL,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
 
     PRIMARY KEY (id),
     UNIQUE KEY (name),
@@ -19,8 +19,8 @@ CREATE TABLE entry (
     `url` VARBINARY(512) NOT NULL,
     `title` VARCHAR(512) NOT NULL,
 
-    `created_at` TIMESTAMP NOT NULL,
-    `updated_at` TIMESTAMP NOT NULL,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
 
     PRIMARY KEY (id),
     UNIQUE KEY (url(191))
@@ -33,8 +33,8 @@ CREATE TABLE bookmark (
     `entry_id` BIGINT UNSIGNED NOT NULL,
     `comment` VARCHAR(256) NOT NULL,
 
-    `created_at` TIMESTAMP NOT NULL,
-    `updated_at` TIMESTAMP NOT NULL,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
 
     PRIMARY KEY (id),
     UNIQUE KEY (user_id, entry_id),

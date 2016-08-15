@@ -1,6 +1,5 @@
 package internbookmark.repository
 
-import internbookmark.service
 import internbookmark.repository
 import internbookmark.model.{Entry, Bookmark, User}
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -8,8 +7,6 @@ import org.joda.time.LocalDateTime
 import slick.driver.MySQLDriver.api._
 import slick.jdbc.GetResult
 import com.github.tototoshi.slick.MySQLJodaSupport._
-
-import scala.collection.Searching.search
 
 object Bookmarks {
 
@@ -51,8 +48,9 @@ object Bookmarks {
      }
    }
 
-  def delete(bookmark: Bookmark)(implicit ctx: Context): Unit =
-    run(sqlu"""DELETE FROM bookmark WHERE id = ${bookmark.id} """)
+  def delete(bookmark: Bookmark)(implicit ctx: Context): Unit = {
+    val _: Int = run(sqlu"""DELETE FROM bookmark WHERE id = ${bookmark.id} """)
+  }
 
   def findByEntry(user: User, entry: Entry)(implicit ctx: Context): Option[Bookmark] = run(
     sql"""
